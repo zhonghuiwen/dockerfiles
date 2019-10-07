@@ -6,10 +6,12 @@ Backup PostgresSQL to S3 (supports periodic backups)
 
 Docker:
 ```sh
+
 $ docker run -e S3_ACCESS_KEY_ID=key -e S3_SECRET_ACCESS_KEY=secret -e S3_BUCKET=my-bucket -e S3_PREFIX=backup -e POSTGRES_DATABASE=dbname -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_HOST=localhost schickling/postgres-backup-s3
 ```
 
 Docker Compose:
+
 ```yaml
 postgres:
   image: postgres
@@ -28,6 +30,8 @@ pgbackups3:
     S3_SECRET_ACCESS_KEY: secret
     S3_BUCKET: my-bucket
     S3_PREFIX: backup
+    S3_ENDPOINT: '**None**' # the AWS Endpoint URL, for S3 Compliant APIs such as [minio](https://minio.io) (default: none)
+    S3_S3V4: 'yes' # set to `yes` to enable AWS Signature Version 4, required for [minio](https://minio.io) servers (default: no)
     POSTGRES_DATABASE: dbname
     POSTGRES_USER: user
     POSTGRES_PASSWORD: password
@@ -39,4 +43,3 @@ pgbackups3:
 You can additionally set the `SCHEDULE` environment variable like `-e SCHEDULE="@daily"` to run the backup automatically.
 
 More information about the scheduling can be found [here](http://godoc.org/github.com/robfig/cron#hdr-Predefined_schedules).
-
