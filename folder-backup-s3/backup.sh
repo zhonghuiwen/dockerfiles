@@ -97,6 +97,8 @@ else
   >&2 echo "Error creating dump of folder ${DATA_PATH}"
 fi
 
+rm -rf /tmp/*.backup.tar.gz
+
 shouldDeleteOld_s3
 
 echo "Folder backup finished"
